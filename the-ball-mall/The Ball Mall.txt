@@ -1,0 +1,99 @@
+cat > ~/Desktop/the-ball-mall/index.html << 'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ball Mall | 6 Brands. One Destination.</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="logo">THE BALL MALL</div>
+        <ul class="nav-links">
+            <li><a href="#brands">Brands</a></li>
+            <li><a href="#about">About</a></li>
+            <li class="cart-icon">🛒 <span id="cart-count">0</span></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <h1>6 BRANDS. ONE DESTINATION.</h1>
+        <p>Command the waves. Define your soul.</p>
+        <a href="#brands" class="cta-button">Explore All Brands</a>
+    </header>
+
+    <section id="brands" class="brands-section">
+        <h2>Our Houses</h2>
+        <div class="brands-grid">
+            
+            <a href="brands/alpha-bay/index.html" class="brand-card alpha-bay">
+                <div class="brand-logo-container">
+                    <img src="assets/images/alpha-bay/logo.png" alt="Alpha Bay" class="brand-logo-img">
+                </div>
+                <h3>Alpha Bay</h3>
+                <p class="motto">"Command the waves, define the soul"</p>
+                <span class="brand-tag">Ocean Lifestyle</span>
+            </a>
+
+            <a href="brands/feng-shui/index.html" class="brand-card feng-shui">
+                <div class="brand-logo-container">
+                    <img src="assets/images/feng-shui/logo.png" alt="Feng Shui Company" class="brand-logo-img">
+                </div>
+                <h3>Feng Shui Company</h3>
+                <p class="motto">Balance in every thread</p>
+                <span class="brand-tag">Harmony Wear</span>
+            </a>
+
+            <a href="brands/geo-pangea/index.html" class="brand-card geo-pangea">
+                <div class="brand-logo-container">
+                    <img src="assets/images/geo-pangea/logo.png" alt="Geo Pangea" class="brand-logo-img">
+                </div>
+                <h3>Geo Pangea</h3>
+                <p class="motto">Rise from the ashes</p>
+                <span class="brand-tag">Phoenix Collection</span>
+            </a>
+
+            <a href="brands/madchi/index.html" class="brand-card madchi">
+                <div class="brand-logo-container">
+                    <img src="assets/images/madchi/logo.png" alt="Madchi" class="brand-logo-img">
+                </div>
+                <h3>Madchi</h3>
+                <p class="motto">Creative by nature</p>
+                <span class="brand-tag">Artistic Street</span>
+            </a>
+
+            <a href="brands/suds/index.html" class="brand-card suds">
+                <div class="brand-logo-container">
+                    <img src="assets/images/suds/logo.png" alt="SUDS" class="brand-logo-img">
+                </div>
+                <h3>SUDS</h3>
+                <p class="motto">Fashion & Soap</p>
+                <span class="brand-tag">Clean Living</span>
+            </a>
+
+            <a href="brands/symbolic-nature/index.html" class="brand-card symbolic-nature">
+                <div class="brand-logo-container">
+                    <img src="assets/images/symbolic-nature/logo.png" alt="Symbolic Nature" class="brand-logo-img">
+                </div>
+                <h3>Symbolic Nature</h3>
+                <p class="motto">Rooted in symbolism</p>
+                <span class="brand-tag">Eco Luxury</span>
+            </a>
+
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <h2>The Ball Mall</h2>
+        <p>Six distinct brands. One curated destination. Designed in-house, delivered to your door.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 The Ball Mall. All rights reserved.</p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+EOF

@@ -1,0 +1,203 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: #0a0a0a;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background: rgba(0,0,0,0.95);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.nav-links a:hover {
+    color: #ff3366;
+}
+
+.cart-icon {
+    cursor: pointer;
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    padding: 2rem;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    letter-spacing: 8px;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #aaa;
+    font-style: italic;
+}
+
+.cta-button {
+    padding: 1rem 3rem;
+    background: #ff3366;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+}
+
+.brands-section {
+    padding: 5rem 5%;
+}
+
+.brands-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    letter-spacing: 3px;
+}
+
+.brands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.brand-card {
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.3s;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.brand-card:hover {
+    transform: translateY(-10px);
+}
+
+.brand-logo-container {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.brand-logo-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.brand-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+.motto {
+    font-style: italic;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.brand-tag {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.alpha-bay {
+    background: linear-gradient(135deg, #001f3f 0%, #0074D9 50%, #7FDBFF 100%);
+}
+
+.feng-shui {
+    background: linear-gradient(135deg, #800000 0%, #B8860B 50%, #FFFFFF 100%);
+    color: #fff;
+}
+
+.geo-pangea {
+    background: linear-gradient(135deg, #FF8C00 0%, #FFD700 50%, #800000 100%);
+}
+
+.madchi {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #95a5a6 100%);
+}
+
+.suds {
+    background: linear-gradient(135deg, #FF4136 0%, #FFFFFF 50%, #7FDBFF 100%);
+    color: #333;
+}
+
+.symbolic-nature {
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #FFD700 100%);
+    border-color: #FFD700;
+}
+
+.about-section {
+    padding: 5rem 5%;
+    text-align: center;
+    background: #111;
+}
+
+.about-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: #000;
+    color: #666;
+}
