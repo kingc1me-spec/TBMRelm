@@ -1,251 +1,206 @@
-<!DOCTYPE html>
+tracker_html = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CHANGE THIS: Brand name in the browser tab -->
-    <title>feng-shui | HARMONY WEAR</title>
-    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <title>The Ball Mall | Brand Setup Tracker</title>
     <style>
-        /* CHANGE THIS: Hero background gradient colors to match brand vibe */
-        .brand-hero {
-            background: linear-gradient(135deg, #001f3f 0%, #0074D9 50%, #7FDBFF 100%);
-            padding: 8rem 5% 4rem;
-            text-align: center;
-        }
-        .brand-hero img {
-            max-width: 200px;
-            margin-bottom: 2rem;
-        }
-        .products {
-            padding: 4rem 5%;
-            max-width: 1200px;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            padding: 2rem;
+            max-width: 900px;
             margin: 0 auto;
         }
-        .products h2 {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .product-card {
-            background: #1a1a2e;
-            border-radius: 15px;
-            overflow: hidden;
-            text-align: center;
-            padding-bottom: 1.5rem;
-        }
-        .product-img {
-            height: 350px;
-            overflow: hidden;
-        }
-        .product-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .product-card h3 {
-            padding: 1rem;
-            font-size: 1.3rem;
-        }
-        .price {
+        h1 {
             color: #ff3366;
-            font-size: 1.4rem;
-            font-weight: bold;
             margin-bottom: 0.5rem;
+            font-size: 2rem;
         }
-        .shipping {
+        .subtitle {
             color: #888;
-            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        .brand-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #333;
+            transition: border-color 0.3s;
+        }
+        .brand-card.done {
+            border-left-color: #00d632;
+        }
+        .brand-card.in-progress {
+            border-left-color: #ffaa00;
+        }
+        .brand-card.broken {
+            border-left-color: #ff3366;
+        }
+        .brand-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 1rem;
         }
-        .payment-options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            padding: 0 1rem;
-        }
-        .pay-btn {
-            padding: 0.8rem;
-            border-radius: 25px;
-            text-decoration: none;
+        .brand-name {
+            font-size: 1.3rem;
             font-weight: bold;
-            font-size: 0.95rem;
-            transition: transform 0.2s;
         }
-        .pay-btn:hover {
-            transform: scale(1.02);
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
         }
-        .pay-card {
-            background: #635bff;
-            color: white;
+        .status-pending { background: #333; color: #888; }
+        .status-progress { background: #ffaa0022; color: #ffaa00; }
+        .status-done { background: #00d63222; color: #00d632; }
+        .status-broken { background: #ff336622; color: #ff3366; }
+        
+        .checklist {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
         }
-        .pay-venmo {
-            background: #008cff;
-            color: white;
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #aaa;
         }
-        .pay-cashapp {
-            background: #00d632;
-            color: white;
+        .check-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #ff3366;
+            cursor: pointer;
         }
-        .pay-zoho {
-            background: #ff3366;
-            color: white;
+        .check-item.checked {
+            color: #00d632;
+            text-decoration: line-through;
         }
-        .size-selector {
-            margin: 1rem;
-            padding: 0.5rem;
-            border-radius: 10px;
-            border: 1px solid #333;
+        .notes {
+            margin-top: 1rem;
+            padding: 0.8rem;
             background: #0a0a0a;
-            color: white;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #ffaa00;
+        }
+        .add-brand {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #1a1a2e;
+            border-radius: 12px;
+            border: 2px dashed #333;
+            text-align: center;
+            color: #666;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff3366, #ff6b6b);
+            border-radius: 3px;
+            transition: width 0.5s;
+        }
+        .progress-text {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #888;
         }
     </style>
 </head>
 <body>
-    <nav class="main-nav">
-        <a href="../../index.html" class="logo">← THE BALL MALL</a>
-        <ul class="nav-links">
-            <li class="cart-icon">🛒 <span id="cart-count">0</span></li>
-        </ul>
-    </nav>
+    <h1>The Ball Mall</h1>
+    <p class="subtitle">Brand Page Setup Tracker</p>
 
-    <!-- BRAND HERO SECTION -->
-    <div class="brand-hero">
-        <!-- CHANGE THIS: Logo image path and alt text -->
-        <img src="../../assets/img/feng-shui-logo.png" alt="feng-shui">
-        <!-- CHANGE THIS: Brand name -->
-        <h1>feng-Shui</h1>
-        <!-- CHANGE THIS: Brand tagline/slogan -->
-        <p>"harmony wear"</p>
+    <!-- ALPHA BAY -->
+    <div class="brand-card done">
+        <div class="brand-header">
+            <span class="brand-name">Alpha Bay</span>
+            <span class="status-badge status-done">LIVE</span>
+        </div>
+        <div class="checklist">
+            <label class="check-item checked"><input type="checkbox" checked disabled> Folder created</label>
+            <label class="check-item checked"><input type="checkbox" checked disabled> index.html (lowercase)</label>
+            <label class="check-item checked"><input type="checkbox" checked disabled> Brand hero styled</label>
+            <label class="check-item checked"><input type="checkbox" checked disabled> Products added</label>
+            <label class="check-item checked"><input type="checkbox" checked disabled> Payment links set</label>
+            <label class="check-item checked"><input type="checkbox" checked disabled> Images uploaded</label>
+            <label class="check-item checked"><input type="checkbox" checked disabled> Homepage linked</label>
+            <label class="check-item checked"><input type="checkbox" checked disabled> Tested &amp; working</label>
+        </div>
     </div>
 
-    <section class="products">
-        <h2>Collection</h2>
-        <div class="product-grid">
-            
-            <!-- ═══════════════════════════════════════════════════════════════ -->
-            <!-- PRODUCT 1 -->
-            <!-- ═══════════════════════════════════════════════════════════════ -->
-            <div class="product-card">
-                <div class="product-img">
-                    <!-- CHANGE THIS: Product image path and alt text -->
-                    <img src="../../assets/img/feng-shui/logo.png" alt="Product 1 Name">
-                </div>
-                <!-- CHANGE THIS: Product name -->
-                <h3>Product 1 Name</h3>
-                <!-- CHANGE THIS: Product price -->
-                <p class="price">$XX.00</p>
-                <p class="shipping">Free shipping on orders over $75</p>
-                
-                <!-- CHANGE THIS: ID must be unique (use product name abbreviation) -->
-                <select class="size-selector" id="size-product1">
-                    <!-- CHANGE THIS: Options based on product type -->
-                    <option value="">Select Size</option>
-                    <option value="S">Small</option>
-                    <option value="M">Medium</option>
-                    <option value="L">Large</option>
-                    <option value="XL">X-Large</option>
-                    <option value="2XL">2X-Large</option>
-                </select>
-                
-                <div class="payment-options">
-                    <!-- CHANGE THIS: Stripe payment link for this product -->
-                    <a href="https://buy.stripe.com/YOUR-STRIPE-LINK-PRODUCT1" class="pay-btn pay-card">💳 Card / Apple Pay</a>
-                    <!-- CHANGE THIS: Venmo link - update amount and note -->
-                    <a href="https://venmo.com/YOUR-VENMO?txn=pay&amount=XX&note=BRAND%20NAME%20Product%201" class="pay-btn pay-venmo">💙 Venmo</a>
-                    <!-- CHANGE THIS: Cash App link - update amount -->
-                    <a href="https://cash.app/$YOURCASHTAG/XX" class="pay-btn pay-cashapp">💚 Cash App</a>
-                    <!-- CHANGE THIS: Zoho order form link (optional) -->
-                    <a href="https://forms.zohopublic.com/YOUR-ZOHO-FORM" class="pay-btn pay-zoho">📋 Order Form (Zoho)</a>
-                </div>
-            </div>
-
-            <!-- ═══════════════════════════════════════════════════════════════ -->
-            <!-- PRODUCT 2 -->
-            <!-- ═══════════════════════════════════════════════════════════════ -->
-            <div class="product-card">
-                <div class="product-img">
-                    <!-- CHANGE THIS: Product image path and alt text -->
-                    <img src="../../assets/img/feng-shui-logo.png" alt="Product 2 Name">
-                </div>
-                <!-- CHANGE THIS: Product name -->
-                <h3>Product 2 Name</h3>
-                <!-- CHANGE THIS: Product price -->
-                <p class="price">$XX.00</p>
-                <p class="shipping">Free shipping on orders over $75</p>
-                
-                <!-- CHANGE THIS: ID must be unique -->
-                <select class="size-selector" id="size-product2">
-                    <!-- CHANGE THIS: Options (example for hoodie) -->
-                    <option value="">Select Size</option>
-                    <option value="S">Small</option>
-                    <option value="M">Medium</option>
-                    <option value="L">Large</option>
-                    <option value="XL">X-Large</option>
-                    <option value="2XL">2X-Large</option>
-                </select>
-                
-                <div class="payment-options">
-                    <!-- CHANGE THIS: Stripe payment link -->
-                    <a href="https://buy.stripe.com/YOUR-STRIPE-LINK-PRODUCT2" class="pay-btn pay-card">💳 Card / Apple Pay</a>
-                    <!-- CHANGE THIS: Venmo link -->
-                    <a href="https://venmo.com/YOUR-VENMO?txn=pay&amount=XX&note=BRAND%20NAME%20Product%202" class="pay-btn pay-venmo">💙 Venmo</a>
-                    <!-- CHANGE THIS: Cash App link -->
-                    <a href="https://cash.app/$YOURCASHTAG/XX" class="pay-btn pay-cashapp">💚 Cash App</a>
-                    <!-- CHANGE THIS: Zoho form link -->
-                    <a href="https://forms.zohopublic.com/YOUR-ZOHO-FORM" class="pay-btn pay-zoho">📋 Order Form (Zoho)</a>
-                </div>
-            </div>
-
-            <!-- ═══════════════════════════════════════════════════════════════ -->
-            <!-- PRODUCT 3 -->
-            <!-- ═══════════════════════════════════════════════════════════════ -->
-            <div class="product-card">
-                <div class="product-img">
-                    <!-- CHANGE THIS: Product image path and alt text -->
-                    <img src="../../assets/img/feng-shui/feng-shui-logo.png" alt="Product 3 Name">
-                </div>
-                <!-- CHANGE THIS: Product name -->
-                <h3>Product 3 Name</h3>
-                <!-- CHANGE THIS: Product price -->
-                <p class="price">$XX.00</p>
-                <p class="shipping">Free shipping on orders over $75</p>
-                
-                <!-- CHANGE THIS: ID must be unique -->
-                <select class="size-selector" id="size-product3">
-                    <!-- CHANGE THIS: Options (example for cap/accessory) -->
-                    <option value="">Select Style</option>
-                    <option value="Snapback">Snapback</option>
-                    <option value="Dad-Hat">Dad Hat</option>
-                </select>
-                
-                <div class="payment-options">
-                    <!-- CHANGE THIS: Stripe payment link -->
-                    <a href="https://buy.stripe.com/YOUR-STRIPE-LINK-PRODUCT3" class="pay-btn pay-card">💳 Card / Apple Pay</a>
-                    <!-- CHANGE THIS: Venmo link -->
-                    <a href="https://venmo.com/YOUR-VENMO?txn=pay&amount=XX&note=BRAND%20NAME%20Product%203" class="pay-btn pay-venmo">💙 Venmo</a>
-                    <!-- CHANGE THIS: Cash App link -->
-                    <a href="https://cash.app/$YOURCASHTAG/XX" class="pay-btn pay-cashapp">💚 Cash App</a>
-                    <!-- CHANGE THIS: Zoho form link -->
-                    <a href="https://forms.zohopublic.com/YOUR-ZOHO-FORM" class="pay-btn pay-zoho">📋 Order Form (Zoho)</a>
-                </div>
-            </div>
-
-            <!-- ═══════════════════════════════════════════════════════════════ -->
-            <!-- ADD MORE PRODUCTS: Copy any .product-card above and paste here -->
-            <!-- Remember to update ALL fields, especially the id="size-xxx" -->
-            <!-- ═══════════════════════════════════════════════════════════════ -->
-
+    <!-- FENG SHUI -->
+    <div class="brand-card broken">
+        <div class="brand-header">
+            <span class="brand-name">Feng Shui</span>
+            <span class="status-badge status-broken">BROKEN</span>
         </div>
-    </section>
+        <div class="checklist">
+            <label class="check-item checked"><input type="checkbox" checked> Folder created</label>
+            <label class="check-item"><input type="checkbox"> index.html (lowercase) - CURRENTLY "Index.html"</label>
+            <label class="check-item"><input type="checkbox"> Brand hero styled</label>
+            <label class="check-item"><input type="checkbox"> Products added</label>
+            <label class="check-item"><input type="checkbox"> Payment links set</label>
+            <label class="check-item"><input type="checkbox"> Images uploaded</label>
+            <label class="check-item"><input type="checkbox"> Homepage linked</label>
+            <label class="check-item"><input type="checkbox"> Tested &amp; working</label>
+        </div>
+        <div class="notes">
+            CRITICAL FIXES NEEDED:<br>
+            1. Rename file from Index.html to index.html (all lowercase)<br>
+            2. Remove the template_html line at the top - that was Python code, not HTML<br>
+            3. Remove the closing triple-quote at the bottom<br>
+            4. Verify the file starts with &lt;!DOCTYPE html&gt;
+        </div>
+    </div>
 
-    <script src="../../assets/js/main.js"></script>
+    <!-- ADD NEW BRANDS BELOW -->
+    <div class="brand-card">
+        <div class="brand-header">
+            <span class="brand-name">Brand Name 3</span>
+            <span class="status-badge status-pending">NOT STARTED</span>
+        </div>
+        <div class="checklist">
+            <label class="check-item"><input type="checkbox"> Folder created</label>
+            <label class="check-item"><input type="checkbox"> index.html (lowercase)</label>
+            <label class="check-item"><input type="checkbox"> Brand hero styled</label>
+            <label class="check-item"><input type="checkbox"> Products added</label>
+            <label class="check-item"><input type="checkbox"> Payment links set</label>
+            <label class="check-item"><input type="checkbox"> Images uploaded</label>
+            <label class="check-item"><input type="checkbox"> Homepage linked</label>
+            <label class="check-item"><input type="checkbox"> Tested &amp; working</label>
+        </div>
+    </div>
+
+    <div class="add-brand">
+        + Add more brand cards by copying the HTML block above
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: 12.5%"></div>
+    </div>
+    <p class="progress-text">1 of 8 brands complete (12.5%)</p>
+
 </body>
-</html>
+</html>"""
 
+with open('/mnt/agents/output/brand-tracker.html', 'w') as f:
+    f.write(tracker_html)
 
+print("Tracker saved!")
+print(f"Size: {len(tracker_html)} chars")
